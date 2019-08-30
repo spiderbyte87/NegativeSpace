@@ -1,0 +1,210 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://World1.gd" type="Script" id=1]
+[ext_resource path="res://sprites/blackDude_smiley.svg" type="Texture" id=2]
+[ext_resource path="res://sprites/whiteDude_smiley.svg" type="Texture" id=3]
+[ext_resource path="res://sounds/mongozap.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/mongozap_R.wav" type="AudioStream" id=5]
+[ext_resource path="res://sprites/youDIDit.svg" type="Texture" id=6]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_unshaded = true
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CylinderShape" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_unshaded = true
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CylinderShape" id=4]
+
+[sub_resource type="CylinderMesh" id=5]
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_unshaded = true
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CylinderShape" id=7]
+
+[sub_resource type="CylinderShape" id=8]
+
+[sub_resource type="CylinderShape" id=9]
+
+[sub_resource type="CylinderShape" id=10]
+
+[sub_resource type="BoxShape" id=11]
+
+[sub_resource type="CubeMesh" id=12]
+
+[sub_resource type="SpatialMaterial" id=13]
+flags_unshaded = true
+
+[sub_resource type="BoxShape" id=14]
+
+[sub_resource type="SpatialMaterial" id=15]
+flags_unshaded = true
+albedo_color = Color( 0.819608, 0.819608, 0.819608, 1 )
+
+[node name="World" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="LevelMesh" type="CSGCombiner" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0.985055 )
+calculate_tangents = false
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+
+[node name="CSGPolygon" type="CSGPolygon" parent="LevelMesh"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+layers = 3
+calculate_tangents = false
+use_collision = true
+invert_faces = true
+polygon = PoolVector2Array( -7.00999, 1.20879, -5.21745, 0.891003, -5.11413, 0.0375506, -4.39974, 0.419691, -4.18891, 0.806227, -3.67938, 0.771088, -2.6779, 0.577819, -2.56071, 1.2997, -3.02927, 1.58722, -3.00365, 1.71679, -2.35357, 1.40053, -2.37921, 0.4724, -0.0689106, 0.101283, 0.0704527, -0.74223, -2.67541, -0.392812, -2.85086, -0.66091, -3.45339, -0.630783, -3.49045, -0.383139, -7.05999, -0.103602 )
+depth = 2.0
+material = SubResource( 1 )
+
+[node name="CSGCylinderWHITE" type="CSGCylinder" parent="LevelMesh/CSGPolygon"]
+transform = Transform( 1, 1.77574e-14, -3.72529e-09, -9.6412e-28, 4.37115e-08, -1, -5.32907e-14, 1, 4.37114e-08, -7.02494, 3.37821, -1.46383 )
+layers = 3
+operation = 2
+calculate_tangents = false
+radius = 0.624
+height = 4.211
+sides = 20
+
+[node name="whiteBubbleAREA" type="Area" parent="LevelMesh/CSGPolygon/CSGCylinderWHITE"]
+transform = Transform( 0.65, 0, -4.99904e-22, 0, 1, 0, 5.04871e-28, 0, 0.65, 0, 1.13775, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="LevelMesh/CSGPolygon/CSGCylinderWHITE/whiteBubbleAREA"]
+transform = Transform( 1, 0, -7.69082e-22, 0, 0.5, -2.84217e-14, 3.23117e-27, 0, 1, 0, -0.989517, 0 )
+shape = SubResource( 2 )
+
+[node name="CSGCylinderBLACK" type="CSGCylinder" parent="LevelMesh/CSGPolygon"]
+transform = Transform( 1, 1.77574e-14, -3.72529e-09, -9.6412e-28, 4.37115e-08, -1, -5.32907e-14, 1, 4.37114e-08, -5.68098, 3.34055, -1.5 )
+layers = 3
+calculate_tangents = false
+radius = 0.624
+sides = 20
+material = SubResource( 3 )
+
+[node name="blackBubbleAREA" type="Area" parent="LevelMesh/CSGPolygon/CSGCylinderBLACK"]
+transform = Transform( 0.6, 0, 0, 0, 1, 0, 0, 0, 0.6, 0, 0, 0 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="LevelMesh/CSGPolygon/CSGCylinderBLACK/blackBubbleAREA"]
+transform = Transform( 1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="BlackBall" type="RigidBody" parent="LevelMesh/CSGPolygon"]
+transform = Transform( -1.5299e-08, 0, 0.35, 0, 0.35, 0, -0.35, 0, -1.5299e-08, -4.74782, 2.29665, -1.53759 )
+contacts_reported = 2
+contact_monitor = true
+can_sleep = false
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+
+[node name="MeshInstance" type="MeshInstance" parent="LevelMesh/CSGPolygon/BlackBall"]
+transform = Transform( -4.37114e-08, -1, 7.10543e-15, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="LevelMesh/CSGPolygon/BlackBall"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.19209e-07, 0, 0 )
+shape = SubResource( 7 )
+
+[node name="blackBallAREA" type="Area" parent="LevelMesh/CSGPolygon/BlackBall"]
+
+[node name="CollisionShape" type="CollisionShape" parent="LevelMesh/CSGPolygon/BlackBall/blackBallAREA"]
+transform = Transform( -2.84124e-08, -1, 0, 0.65, -4.37114e-08, 0, 0, 0, 0.65, 1.19209e-07, 0, 0 )
+shape = SubResource( 8 )
+
+[node name="Sprite3D" type="Sprite3D" parent="LevelMesh/CSGPolygon/BlackBall"]
+transform = Transform( -2.62268e-08, 0, 1, 0, 0.6, 0, -0.6, 0, -4.37114e-08, -5, 0, 0 )
+texture = ExtResource( 2 )
+
+[node name="WhiteBall" type="RigidBody" parent="LevelMesh/CSGPolygon"]
+transform = Transform( -1.5299e-08, 0, 0.35, 0, 0.35, 0, -0.35, 0, -1.5299e-08, -6.2369, 0.371517, -1.5942 )
+collision_layer = 2
+collision_mask = 2
+contacts_reported = 2
+contact_monitor = true
+can_sleep = false
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+
+[node name="CollisionShape" type="CollisionShape" parent="LevelMesh/CSGPolygon/WhiteBall"]
+transform = Transform( -4.37114e-08, -0.999999, 0, 0.999999, -4.37114e-08, 0, 0, 0, 0.999999, -0.0114245, 0, 0 )
+shape = SubResource( 9 )
+
+[node name="whiteBallAREA" type="Area" parent="LevelMesh/CSGPolygon/WhiteBall"]
+
+[node name="CollisionShape" type="CollisionShape" parent="LevelMesh/CSGPolygon/WhiteBall/whiteBallAREA"]
+transform = Transform( -2.84124e-08, -1, 0, 0.65, -4.37114e-08, 0, 1.05879e-22, 0, 0.65, -0.0114245, 0, 0 )
+shape = SubResource( 10 )
+
+[node name="Sprite3D" type="Sprite3D" parent="LevelMesh/CSGPolygon/WhiteBall"]
+transform = Transform( -2.62268e-08, 0, 1, 0, 0.6, 0, -0.6, 0, -4.37114e-08, -5, 0, 0 )
+texture = ExtResource( 3 )
+
+[node name="FinishDetector" type="Area" parent="."]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.812723, 0.951553, 0 )
+monitorable = false
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="FinishDetector"]
+transform = Transform( 0.1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 11 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.14771, 0.86, 10.18 )
+projection = 1
+fov = 50.0
+size = 3.5
+
+[node name="Background" type="StaticBody" parent="."]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 1, -3.52298, 0, -3.249 )
+collision_layer = 32
+collision_mask = 32
+
+[node name="MeshInstance" type="MeshInstance" parent="Background"]
+transform = Transform( 1.91068e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 0, 0 )
+layers = 32
+mesh = SubResource( 12 )
+material/0 = SubResource( 13 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Background"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 14 )
+
+[node name="Floor" type="CSGPolygon" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0680246, 0, 0 )
+calculate_tangents = false
+use_collision = true
+polygon = PoolVector2Array( -7.31242, -1.49841, -7.27103, 2.2901, -6.91214, 2.27673, -6.99817, -0.0581681, -5.14942, -0.201119, -5.15069, -0.485279, -4.44218, -0.535174, -4.38228, -0.260869, -3.45402, -0.337796, -3.38222, -0.737817, -2.90547, -0.788863, -2.6386, -0.348053, -0.648745, -0.59422, -0.470012, -1.64827 )
+material = SubResource( 15 )
+
+[node name="cylinderTWEEN" type="Tween" parent="."]
+
+[node name="Out" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -25.0
+
+[node name="In" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -25.0
+
+[node name="LevelCompleteText" type="Sprite3D" parent="."]
+transform = Transform( 0.483499, 0.127392, 0, -0.127392, 0.483499, 0, 0, 0, 1, -4.62054, 1.57201, 0 )
+visible = false
+cast_shadow = 0
+double_sided = false
+texture = ExtResource( 6 )
+[connection signal="body_entered" from="FinishDetector" to="." method="_on_FinishDetector_body_entered"]
